@@ -1,0 +1,8 @@
+langchain
+pymilvus
+langchain-huggingface
+sentence-transformers
+langchain-tavily
+langgraph
+langchain-cohere
+dotenv
