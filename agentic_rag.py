@@ -12,7 +12,6 @@ from langgraph.prebuilt import ToolNode, tools_condition, create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
 
-from langchain_milvus import Milvus
 from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
