@@ -51,13 +51,13 @@ for message in st.session_state.messages:
 if prompt := st.chat_input("ask me anything (about philosophy)"):
     # add user input to messsage history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    langchain_messages = st.session_state.messages
-    # langchain_messages = {"messages": [{"role":"user", "content":prompt}]}
+    # langchain_messages = st.session_state.messages
+    langchain_messages = {"messages": [{"role":"user", "content":prompt}]}
     # display user input
     with st.chat_message("user", avatar = "👾"):
         st.markdown(prompt)
 
-    with st.chat_message("ai", avatar = "👻"):
+    with st.chat_message("assistant", avatar = "👻"):
         # pass in thread_id to langchain model
         config = {"configurable": {"thread_id": st.session_state.thread_id}}
         # get response from model
@@ -65,7 +65,7 @@ if prompt := st.chat_input("ask me anything (about philosophy)"):
         #display model response
         msg = response["messages"][-1].content
         st.markdown(msg)
-        st.session_state.messages.append({"role":"ai", "content": msg})
+        st.session_state.messages.append({"role":"assistant", "content": msg})
 
         # for step in graph.stream(
         #     {"messages": [{"role": "user", "content": prompt}]},
