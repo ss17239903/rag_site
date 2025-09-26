@@ -1,4 +1,5 @@
 streamlit
+pydantic
 langchain-openai
 langchain
 pymilvus
