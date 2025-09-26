@@ -60,23 +60,23 @@ if prompt := st.chat_input("ask me anything (about philosophy)"):
         # pass in thread_id to langchain model
         config = {"configurable": {"thread_id": st.session_state.thread_id}}
         # get response from model
-        #response = graph.invoke(langchain_messages, config = config)
+        response = graph.invoke(langchain_messages, config = config)
         #display model response
-        # msg = response["messages"][-1].content
-        # st.markdown(msg)
-        # st.session_state.messages.append({"role":"assistant", "content": msg})
+        msg = response["messages"][-1].content
+        st.markdown(msg)
+        st.session_state.messages.append({"role":"assistant", "content": msg})
 
-        for step in graph.stream(
-            {"messages": [{"role": "user", "content": prompt}]},
-            stream_mode="values",
-            config = config,
-        ):
-            msg = step["messages"][-1]
-            msg.pretty_print()
-            # step_record = step
-            # add model response to message history
-        st.markdown(msg.content)
-        st.session_state.messages.append({"role":"assistant", "content": msg.content})
+        # for step in graph.stream(
+        #     {"messages": [{"role": "user", "content": prompt}]},
+        #     stream_mode="values",
+        #     config = config,
+        # ):
+        #     msg = step["messages"][-1]
+        #     msg.pretty_print()
+        #     # step_record = step
+        #     # add model response to message history
+        # st.markdown(msg.content)
+        # st.session_state.messages.append({"role":"assistant", "content": msg.content})
         #
         # try:
         #     context = step_record["context"]
