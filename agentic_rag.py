@@ -1,7 +1,6 @@
 #environment location: /Users/sandhyasivakumar/opt/anaconda3/envs/lg - use conda activate lg to see an environment that works
 
 from typing_extensions import List, Annotated, TypedDict, Literal
-from pydantic import BaseModel, Field
 from langchain import hub
 from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage, AIMessage, ToolMessage
