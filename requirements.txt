@@ -1,3 +1,5 @@
+streamlit
+langchain-openai
 langchain
 pymilvus
 langchain-huggingface
