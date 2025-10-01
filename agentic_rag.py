@@ -10,7 +10,7 @@ from langchain.tools.retriever import create_retriever_tool
 
 from langgraph.graph import MessagesState, StateGraph, END
 from langgraph.prebuilt import ToolNode, tools_condition, create_react_agent
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.memory import InMemorySaver
 from langchain_openai import ChatOpenAI
 
 from langchain.chat_models import init_chat_model
@@ -255,7 +255,7 @@ def build_graph():
 
     graph = gb.compile()
 
-    memory = MemorySaver()
+    memory = InMemorySaver()
     graph = gb.compile(checkpointer=memory)
 
     return graph
