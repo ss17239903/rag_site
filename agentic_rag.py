@@ -303,3 +303,24 @@ def build_graph():
 #     stream_mode="values",
 # ):
 #     step["messages"][-1].pretty_print()
+# st.markdown("""
+#         <style>
+#         div[data-testid="stChatMessage"] {
+#             background-color: #CCCEB7 !important;
+#         }
+#         </style>
+#     """, unsafe_allow_html=True)
+
+# st.markdown("""
+# <style>
+#     [class*="st-key-user"] {
+#         background-color: #C9B1BD !important;
+#     }
+#
+#     [class*="st-key-assistant"] {
+#         background-color: #D79233;
+#     }
+#   </style>
+#  """, unsafe_allow_html=True)
+# def chat_message(name):
+#     return st.container(key=f"{name}-{uuid.uuid4()}").chat_message(name=name)
