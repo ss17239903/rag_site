@@ -9,7 +9,9 @@ graph = build_graph()
 
 # initialize chat history
 if 'thread_id' not in st.session_state:
+    print("generating thread id")
     st.session_state.thread_id = generate_thread_id()
+    print("thread_id: ", st.session_state.thread_id)
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
@@ -35,6 +37,7 @@ if prompt := st.chat_input("ask me anything (about philosophy)"):
     with st.chat_message("assistant", avatar = "👻"):
         # pass in thread_id to langchain model
         config = {"configurable": {"thread_id": st.session_state.thread_id}}
+        print("current config: ", config)
         # get response from model
         response = graph.invoke({"messages": [user_input]}, config = config)
         #display model response
