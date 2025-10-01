@@ -1,5 +1,8 @@
 #environment location: /Users/sandhyasivakumar/opt/anaconda3/envs/lg - use conda activate lg to see an environment that works
-
+# git add .
+# git commit -m "sldkfj"
+# git branch -m main
+# git push - u origin main
 from typing_extensions import List, Annotated, TypedDict, Literal
 from pydantic import BaseModel, Field
 from langchain import hub
