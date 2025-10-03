@@ -11,4 +11,5 @@ langchain-cohere
 dotenv
 cohere
 collections
-psycopg
+"psycopg[binary]"
+langgraph-checkpoint-postgres
