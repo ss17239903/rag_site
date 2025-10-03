@@ -78,10 +78,10 @@ class PostgresChatMemory:
                     (user_id,)
                 )
                 rows = cur.fetchall()
-            summaries = defaultdict(list)
+            summaries = defaultdict(str)
             for thread_id, summary in rows:
                 summaries[thread_id] = summary
-        return summaries 
+        return summaries
 
     def load(self, thread_id: str) -> List[Dict[str, Any]]:
         """load all messages associated with a thread, ordered by time"""

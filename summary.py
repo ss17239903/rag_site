@@ -1,8 +1,6 @@
 from utils import *
 import cohere
 
-co = cohere.ClientV2()
-
 SUMMARY_PROMPT = (
     """
     Concisely summarize the following chat history. The length of the summary should be a maximum of 100 words.
@@ -19,7 +17,7 @@ SUMMARY_PROMPT = (
 )
 def summarize_text(messages):
     """call the model to summarize text if the text is long enough"""
-
+    co = cohere.ClientV2()
     msgs = "\n\n".join(message["content"] for message in messages)
     prompt = SUMMARY_PROMPT.format(messages=msgs)
     summary = co.chat(

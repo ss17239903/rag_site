@@ -5,8 +5,8 @@ from utils import *
 from db_init import *
 from summary import *
 st.title("meow")
-# db_url = st.secrets["DATABASE_URL"]
-db_url = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+db_url = st.secrets["DATABASE_URL"]
+# db_url = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
 memory = PostgresChatMemory(db_url)
 
 if 'thread_id' not in st.session_state:
@@ -49,11 +49,11 @@ if 'user_id' in st.session_state:
                 for thread in thread_msgs:
                     print("thread: ", str(thread))
                     # ...summarize if it hasn't been summarized already...
-                    if summaries[thread] == []:
+                    if summaries[thread] == "":
                         summary = summarize_text(thread_msgs[thread])
                         print("summary: ", summary)
                         memory.save_summary(user_id, thread, summary)
-                        summaries[thread].append(summary)
+                        summaries[thread] = summary
                     #...then add summary to message history.
                     st.session_state.messages.append({"role": "assistant", "content": summaries[thread]})
             else:
@@ -86,6 +86,7 @@ if 'user_id' in st.session_state:
             config = {"configurable": {"thread_id": st.session_state.thread_id}}
             print("current config: ", config)
             msgs = st.session_state.messages
+            print(msgs)
             for msg in msgs:
                 print(msg["role"])
             # get response from model
