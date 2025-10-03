@@ -5,8 +5,8 @@ from utils import *
 from db_init import *
 from summary import *
 st.title("meow")
-db_url = st.secrets["DATABASE_URL"]
-# db_url = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+# db_url = st.secrets["DATABASE_URL"]
+db_url = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
 memory = PostgresChatMemory(db_url)
 
 if 'thread_id' not in st.session_state:
@@ -29,7 +29,7 @@ if submit:
         st.session_state.existing_user = True
     else:
         st.write("created an account for you 🥳 ")
-        st.session_state.existing_user = False 
+        st.session_state.existing_user = False
 
 if 'user_id' in st.session_state:
     user_id = st.session_state.user_id

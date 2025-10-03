@@ -13,12 +13,13 @@
 base = "light"
 
 # Primary accent color.
-primaryColor = "#F40000" # fire engine
+primaryColor = "#BDEFE8" # fire engine
 # "#F40000" - red
 #7AE1DD - tiffany blue
 
 # Background color of the app.
-backgroundColor = "#F4CFFF"
+backgroundColor = "#EFBCD5"
+#"#DE9289" # hue of #441813
 #"#F1AED8"
 #"#EEB7FF"
 #"#EFBCD5" # - fairy tale pink
@@ -29,14 +30,18 @@ backgroundColor = "#F4CFFF"
 #C7DFC5 - some kind of light green
 
 # Background color used for most interactive widgets.
-secondaryBackgroundColor = "#ed9695"
+secondaryBackgroundColor = "#EFC6BD"
+#"#DDC988" #warm yellow
+# light red "#ed9695"
 # green "#91C7B1"
 #"#DBC2BD"
 #D0ADA7 - tea rose (light red)
 #C9B1BD - thistle
 
 # Color used for almost all text.
-textColor = "#0A381B"
+textColor = "#7B2F1E"
+#"#134418" # pakistan green
+#"#0A381B"
 #"#286162" # caribbean current
 # "#561D25" - maroon??
 #"#243010"# - green
@@ -48,7 +53,10 @@ textColor = "#0A381B"
 #7070ff - slightly darker indigo
 
 # Color used for all links.
-linkColor = "#381FC6"
+linkColor = "#3078C5"
+#"#392EA2"
+#"#181344" - russian violet
+# blue/purple (link color)"#381FC6"
 #"#CA802B" # bronze
 # "#BB342F"
 #561D25
