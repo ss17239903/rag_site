@@ -37,7 +37,7 @@ secondaryBackgroundColor = "#EFC6BD"
 #"#DBC2BD"
 #D0ADA7 - tea rose (light red)
 #C9B1BD - thistle
-
+codeBackgroundColor = "#F0BDCD"
 # Color used for almost all text.
 textColor = "#7B2F1E"
 #"#134418" # pakistan green
