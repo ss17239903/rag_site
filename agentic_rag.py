@@ -12,14 +12,9 @@ from langchain_core.tools import tool
 from langchain.tools.retriever import create_retriever_tool
 
 from langgraph.graph import MessagesState, StateGraph, END
-from langgraph.prebuilt import ToolNode, tools_condition, create_react_agent
+from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import InMemorySaver
-from langchain_openai import ChatOpenAI
-
-from langchain.chat_models import init_chat_model
-from dotenv import load_dotenv
-from langchain_huggingface import HuggingFaceEmbeddings
-
+from langgraph.store.memory import InMemoryStore
 
 import os
 import uuid
@@ -27,19 +22,15 @@ import numpy as np
 
 from utils import *
 
-# llm = init_llm()
-# vector_store = init_vector_store()
 client = init_client()
 web_search = init_web_search()
 cluster_info = init_graph()
 embedder = init_embedder()
+checkpointer = init_checkpointer()
 
-# decider_model = init_llm()
-# response_model = init_llm()
-llm = init_chat_model("command-a-03-2025", model_provider="cohere")
-decider_model = init_chat_model("command-a-03-2025", model_provider="cohere")
-response_model = init_chat_model("command-a-03-2025", model_provider="cohere")
-#search_model = init_chat_model("command-a-03-2025", model_provider="cohere")
+llm = init_llm()
+decider_model = init_llm()
+response_model = init_llm()
 
 class State(MessagesState):
     context: List[Document]
@@ -78,18 +69,6 @@ def retrieve(query: str):
     ]
 
     return serialized, retrieved_docs
-
-
-# @tool(response_format="content_and_artifact")
-# def retrieve(query: str):
-#     """retrieve information related to a query."""
-#     retrieved_docs = vector_store.similarity_search(query, k=2)
-#     serialized = "\n\n".join(
-#     (f"Source: {doc.metadata}\nContent: {doc.page_content}")
-#     for doc in retrieved_docs
-#     )
-#     return serialized, retrieved_docs
-
 
 @tool(response_format="content_and_artifact")
 def search(query: str):
@@ -194,16 +173,9 @@ def generate(state: State):
     conversation_messages = [
         message
         for message in state["messages"]
-        if message.type in ("human", "system")
+        if message.type in ("human", "system", "assistant")
         or (message.type == "ai" and not message.tool_calls)
     ]
-
-
-    # for i, doc in enumerate(docs, 1):
-    #     sources.append(f"[{i}] {doc.metadata.get('url', 'No URL')}")
-    # text_blobs = [f"[{i}] {doc.page_content}" for i, doc in enumerate(docs, 1)]
-    # return "\n\n".join(text_blobs), "\n".join(sources)
-
     system_message_content = (
         "You are an interactive and transparent expert guide."
         "You have an ontology in your mind of the topic the user is asking about. Expose this to the user, ideally in the form of a diagram or chart."
@@ -231,7 +203,8 @@ def generate(state: State):
     response = llm.invoke(prompt)
 
     return {"messages": [response], "context": context}
-
+# DB_URI = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+# with PostgresSaver.from_conn_string(DB_URI) as memory:
 def build_graph():
     gb = StateGraph(State)
 
@@ -258,72 +231,7 @@ def build_graph():
 
     graph = gb.compile()
 
-    memory = InMemorySaver()
-    graph = gb.compile(checkpointer=memory)
+    # memory = InMemorySaver()
+    # graph = gb.compile(checkpointer=memory)
 
     return graph
-#https://docs.langchain.com/langsmith/evaluation-approaches
-
-#https://docs.langchain.com/langsmith/evaluation-approaches
-#https://docs.langchain.com/langsmith/evaluation-approaches
-#https://docs.langchain.com/langsmith/evaluation-approaches
-#"what's an approrpirate stitch length for different types of fabric"
-# init_llm()
-# vector_store = init_vector_store()
-#
-# graph = build_graph()
-#
-# config = {"configurable": {"thread_id": "1"}}
-# input_message = "what's the best sewing machine for beginners?"
-# response = graph.invoke({"messages": [{"role": "user", "content": input_message}]}, config = config)
-#
-# response["messages"][-1].pretty_print()
-#
-# input_message2 = "where can i take classes on how to use a sewing machine?"
-# response2 = graph.invoke({"messages": [{"role": "user", "content": input_message2}]}, config = config)
-#
-# response2["messages"][-1].pretty_print()
-
-#agent_executor = create_react_agent(llm, [retrieve], checkpointer=memory)
-
-# config = {"configurable": {"thread_id": "1"}}
-#
-# input_message = (
-#     "what are some good sewing machines for beginners?"
-#     "how do i use the machine you recommended?"
-# )
-#
-# for event in agent_executor.stream(
-#     {"messages": [{"role": "user", "content": input_message}]},
-#     stream_mode = "values",
-#     config = config,
-# ):
-#     event["messages"][-1].pretty_print()
-
-# input_message = "how do i start learning how to sew?"
-# for step in graph.stream(
-#     {"messages": [{"role": "user", "content": input_message}]},
-#     stream_mode="values",
-# ):
-#     step["messages"][-1].pretty_print()
-# st.markdown("""
-#         <style>
-#         div[data-testid="stChatMessage"] {
-#             background-color: #CCCEB7 !important;
-#         }
-#         </style>
-#     """, unsafe_allow_html=True)
-
-# st.markdown("""
-# <style>
-#     [class*="st-key-user"] {
-#         background-color: #C9B1BD !important;
-#     }
-#
-#     [class*="st-key-assistant"] {
-#         background-color: #D79233;
-#     }
-#   </style>
-#  """, unsafe_allow_html=True)
-# def chat_message(name):
-#     return st.container(key=f"{name}-{uuid.uuid4()}").chat_message(name=name)

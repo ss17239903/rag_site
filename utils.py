@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_tavily import TavilySearch
 from sentence_transformers import SentenceTransformer
-from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.postgres import PostgresSaver
 
 import os
 import uuid
 import pickle
+import random
+import string
 
 
 load_dotenv()
@@ -17,28 +19,18 @@ load_dotenv()
 def generate_thread_id():
     return str(uuid.uuid4())
 
-def init_llm():
-    llm = ChatOpenAI(
-    model="gpt-5-nano-2025-08-07",
-    temperature=0,
-    max_tokens=None,
-    timeout=None,
-    max_retries=2)
-    # api_key="...",  # if you prefer to pass api key in directly instaed of using env vars
-    # base_url="...",
-    # organization="...",
-    # other params...
-    # COHERE_API_KEY = os.environ.get("COHERE_API_KEY")
-    # llm = init_chat_model("command-a-03-2025", model_provider="cohere")
-    # GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
-    # llm = ChatGoogleGenerativeAI(
-    #     model = "gemini-2.5-flash",
-    #     temperature = 0,
-    #     max_tokens = None,
-    #     timeout = None,
-    #     max_retries = 0,
-    # )
+def generate_user_id():
+    length = 8
+    user_id = ''.join(random.choices(string.ascii_letters, k=length))
+    return user_id
 
+def init_checkpointer():
+    DB_URI = "postgresql://neondb_owner:npg_vqebF6uQH5Nt@ep-young-cherry-a8vnq6jm-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+    checkpointer = PostgresSaver.from_conn_string(DB_URI)
+    return checkpointer
+
+def init_llm():
+    llm = init_chat_model("command-a-03-2025", model_provider="cohere")
     return llm
 
 def init_client():

@@ -1,9 +1,11 @@
 [theme]
+#https://coolors.co/dda15e-d1101d-27474e-91c7b1-efbcd5
+
+
 # https://coolors.co/7070ff-ef2d56-ed7d3a-8cd867-7ae1dd
 # https://coolors.co/c9b1bd-567568-db9d47-f40000-7ae1dd
 # https://coolors.co/ffd275-e8ae68-a57f60-e3a587-db5a42
 # https://coolors.co/403f4c-2c2b3c-1b2432-121420-b76d68
-
 # https://coolors.co/dbc2bd-c7dfc5-bb342f-243010-090c08
 # The preset Streamlit theme that your custom theme inherits from.
 #
@@ -11,34 +13,42 @@
 base = "light"
 
 # Primary accent color.
-primaryColor = "#F40000"
+primaryColor = "#D1101D" # fire engine
+# "#F40000" - red
 #7AE1DD - tiffany blue
 
 # Background color of the app.
-backgroundColor = "#C7DFC5"
+backgroundColor = "#EEB7FF"
+#"#EFBCD5" # - fairy tale pink
+# - some kind of light green "#C7DFC5"
 #"#32936F" frog green
 #backgroundColor = "#DB9D47" # - earth yellow
 #8cd867 - pistachio
 #C7DFC5 - some kind of light green
 
 # Background color used for most interactive widgets.
-secondaryBackgroundColor = "#DBC2BD"
+secondaryBackgroundColor = "#ed9695"
+# green "#91C7B1"
 #"#DBC2BD"
 #D0ADA7 - tea rose (light red)
 #C9B1BD - thistle
 
 # Color used for almost all text.
-textColor ="#561D25"
+textColor = "#561D25"
+#"#286162" # caribbean current
+# "#561D25" - maroon??
 #"#243010"# - green
 # textColor = "#F40000"
-#F40000 # - red
+#F40000 # - red 55 31 198
 #561D25 - chocolate cosmos ... SO cute .. mix with #C9B1BD (thistle) even cuter
 #567568 - dark green
 #7F7EFF - indigo
 #7070ff - slightly darker indigo
 
 # Color used for all links.
-linkColor = "#BB342F"
+linkColor = "#381FC6"
+#"#CA802B" # bronze
+# "#BB342F"
 #561D25
 #32936F - orange
 

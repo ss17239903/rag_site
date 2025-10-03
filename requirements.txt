@@ -9,3 +9,6 @@ langchain-tavily
 langgraph
 langchain-cohere
 dotenv
+cohere
+collections
+psycopg
