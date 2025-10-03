@@ -10,6 +10,5 @@ langgraph
 langchain-cohere
 dotenv
 cohere
-collections
 psycopg [binary]
 langgraph-checkpoint-postgres
