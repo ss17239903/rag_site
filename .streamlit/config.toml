@@ -13,12 +13,14 @@
 base = "light"
 
 # Primary accent color.
-primaryColor = "#D1101D" # fire engine
+primaryColor = "#F40000" # fire engine
 # "#F40000" - red
 #7AE1DD - tiffany blue
 
 # Background color of the app.
-backgroundColor = "#EEB7FF"
+backgroundColor = "#F4CFFF"
+#"#F1AED8"
+#"#EEB7FF"
 #"#EFBCD5" # - fairy tale pink
 # - some kind of light green "#C7DFC5"
 #"#32936F" frog green
@@ -34,7 +36,7 @@ secondaryBackgroundColor = "#ed9695"
 #C9B1BD - thistle
 
 # Color used for almost all text.
-textColor = "#561D25"
+textColor = "#0A381B"
 #"#286162" # caribbean current
 # "#561D25" - maroon??
 #"#243010"# - green
